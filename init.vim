@@ -7,8 +7,8 @@ set smarttab
 set softtabstop=4
 set mouse=a
 
-
-call plug#begin('~/.config/nvim/plugged')
+" '/.config/nvim/plugged'
+call plug#begin()
 Plug 'https://github.com/vim-airline/vim-airline' " Status bar
 Plug 'https://github.com/preservim/nerdtree' " NerdTree
 Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
@@ -22,16 +22,34 @@ Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
 Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
 call plug#end()
 
+" Color scheme
+:colorscheme jellybeans
+
 " Key bindings
-nnoremap <C-f> :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-b> :NERDTreeToggle<CR>
 
 nmap <F8> :TagbarToggle<CR>
 
-" icons for NERDTree
+" NERDTree
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
+let g:NERDTreeShowHidden = 1 " show hidden files
+" let g:NERDTreeMinimalUI = 1
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Color scheme
-:colorscheme jellybeans
+
+" open new split panes to right and below
+set splitright
+set splitbelow
+" start terminal in insert mode
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+" open terminal on ctrl+y
+function! OpenTerminal()
+  split term://powershell     "//bash on linux, //powershell on windows
+  resize 10
+endfunction
+nnoremap <c-y> :call OpenTerminal()<CR>
+
+" turn terminal to normal mode with escape
+tnoremap <Esc> <C-\><C-y>
