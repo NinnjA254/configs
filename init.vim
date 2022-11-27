@@ -38,10 +38,10 @@ let g:NERDTreeShowHidden = 1 " show hidden files
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-
 " open new split panes to right and below
 set splitright
 set splitbelow
+
 " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " open terminal on ctrl+y
