@@ -27,6 +27,7 @@ call plug#end()
 
 " Key bindings
 nnoremap <C-b> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFocus<CR>
 
 nmap <F8> :TagbarToggle<CR>
 
@@ -34,6 +35,7 @@ nmap <F8> :TagbarToggle<CR>
 let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="~"
 let g:NERDTreeShowHidden = 1 " show hidden files
+let g:NERDTreeShowLineNumbers = 1 " show line numbers
 " let g:NERDTreeMinimalUI = 1
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -46,10 +48,10 @@ set splitbelow
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " open terminal on ctrl+y
 function! OpenTerminal()
-  split term://powershell     "//bash on linux, //powershell on windows
-  resize 10
+        split term://bash "//bash on linux, //powershell on windows
+        resize 10
 endfunction
-nnoremap <c-y> :call OpenTerminal()<CR>
+nnoremap <F9> :call OpenTerminal()<CR>
 
 " turn terminal to normal mode with escape
-tnoremap <Esc> <C-\><C-y>
+tnoremap <Esc> <C-\><C-y> 
